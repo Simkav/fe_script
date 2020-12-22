@@ -19,10 +19,10 @@ function getMax(num1, num2) {
   return num1 < num2 ? num2 : num1;
 }
 function isEven(num) {
-  return num % 2 === 0 ? true : false;
+  return num % 2 === 0;
 }
 function isNumber(num) {
-  return isNaN(+num) ? false : true;
+  return isNaN(+num);
 }
 function squareResolve(str) {
   str = str.split(","); // Получаем коэфы из строки
@@ -51,11 +51,9 @@ function findRoots(a, b, d) {
 }
 
 function floodProtect() {
-  alert("Dont flood plz");
-  alert("Dont flood plz");
-  alert("Dont flood plz");
-  alert("Dont flood plz");
-  alert("Dont flood plz");
+  for (let i = 0; i < 4; i++) {
+    alert("Dont flood plz");
+  }
 }
 
 function quickMath(num1, num2) {
