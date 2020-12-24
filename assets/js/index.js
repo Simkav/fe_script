@@ -1,74 +1,87 @@
-let isSquare = false;
-const userInput1 = prompt(
-  "Введите первое число, оставьте пустым для решения кв. уравнения"
-);
-let userInput2;
-if (userInput1 === "x" || userInput1 === "") {
-  isSquare = true;
-  userInput2 = prompt("Введите коэффициенты через ,");
-} else {
-  userInput2 = prompt("Пожалуйста введите 2 число");
+"use strict";
+
+// const firstCat = {
+//   name: "Vasyka",
+//   color: "grey",
+//   breed: "Persian",
+//   age: 3,
+//   isSleeping: true,
+//   isMale: true,
+//   isRunning: false,
+//   run: function () {
+//     this.isRunning = !this.isRunning;
+//     return this.isRunning ? "Im running now" : "Im walking now";
+//   },
+//   sleep: function() {
+//     this.isSleeping = !this.isSleeping;
+//     return this.isSleeping ? "Im sleeping now" : "Im awake now"
+//   }
+// };
+// const secondCat = new Object(firstCat);
+
+function Cat(name, color, breed, age, isSleeping, isMale) {
+  this.name = name;
+  this.color = color;
+  this.breed = breed;
+  this.age = age;
+  this.isSleeping = isSleeping;
+  this.isMale = isMale;
+  this.run = function () {
+    this.isRunning = !this.isRunning;
+    return this.isRunning ? "Im running now" : "Im walking now";
+  };
+  this.sleep = function () {
+    this.isSleeping = !this.isSleeping;
+    return this.isSleeping ? "Im sleeping now" : "Im awake now";
+  };
 }
 
-quickMath(userInput1, userInput2);
+const firstCat = new Cat("Vaska", "grey", "Persian", 3, true, true);
 
-function getMin(num1, num2) {
-  return num1 < num2 ? num1 : num2;
+const secondCat = new Cat("Mashka", "black", "Spinx", 2, true, true);
+
+function User(name, surname, age) {
+  this.name = name;
+  this.surname = surname;
+  this.fullName = name + " " + surname;
+  this.age = age;
 }
-function getMax(num1, num2) {
-  return num1 < num2 ? num2 : num1;
+
+const firstUser = new User("Ivan", "Ivanovich", "Ivan Ivanovich", 16);
+
+function Country(name, population, area) {
+  this.name = name;
+  this.population = population;
+  this.area = area;
+  this.update = function () {
+    this.density = this.population / this.area;
+  };
+  this.update();
 }
-function isEven(num) {
-  return num % 2 === 0;
-}
-function isNumber(num) {
-  return isNaN(+num);
-}
-function squareResolve(str) {
-  str = str.split(","); // Получаем коэфы из строки
-  let a = str[0];
-  let b = str[1];
-  let c = str[2];
-  //Проверка на валидный ввод
-  if (isNumber(a) && isNumber(b) && isNumber(c)) {
-    const discriminant = b ** 2 - 4 * a * c;
-    if (discriminant < 0) {
-      console.log([]); // no roots
-    } else {
-      console.log(findRoots(a, b, discriminant));
+
+const Ukraine = new Country("Ukraine", 25000, 50);
+
+function Car(name, maxSpeed) {
+  this.name = name;
+  this.maxSpeed = maxSpeed;
+  this.speed = 0;
+  this.accelerate = function (number) {
+    this.speed = this.speed + number;
+    if (this.speed > this.speed) {
+      this.speed = this.maxSpeed;
     }
-  } else {
-    console.log("Wrong input " + str);
-  }
-}
-//Нахождение корней квадратного уравнения через дискриминант
-function findRoots(a, b, d) {
-  if (d === 0) {
-    return [-b / (2 * a)];
-  } else {
-    return [(-b + Math.sqrt(d)) / (2 * a), (-b - Math.sqrt(d)) / (2 * a)];
-  }
-}
-
-function floodProtect() {
-  for (let i = 0; i < 4; i++) {
-    alert("Dont flood plz");
-  }
-}
-
-function quickMath(num1, num2) {
-  if (num1 === null && num2 === null) {
-    floodProtect();
-  } else if (isSquare) {
-    console.log(squareResolve(num2));
-  } else {
-    if (isNumber(num1) && isNumber(num2)) {
-      console.log("Min number is: " + getMin(num1, num2));
-      console.log("Max number is: " + getMax(num1, num2));
-      console.log("Is " + num1 + " even? " + isEven(num1));
-      console.log("Is " + num2 + " even? " + isEven(num2));
-    } else {
-      console.log("Wrong input");
+    return this.speed;
+  };
+  this.deaccelerate = function (number) {
+    this.speed = this.speed - number;
+    if (0 < this.speed) {
+      this.speed = 0;
     }
-  }
+    return this.speed;
+  };
+  this.stop = function () {
+    return (this.speed = 0);
+  };
 }
+
+const car = new Car("Shevrole", 120);
