@@ -1,87 +1,77 @@
 "use strict";
 
-// const firstCat = {
-//   name: "Vasyka",
-//   color: "grey",
-//   breed: "Persian",
-//   age: 3,
-//   isSleeping: true,
-//   isMale: true,
-//   isRunning: false,
-//   run: function () {
-//     this.isRunning = !this.isRunning;
-//     return this.isRunning ? "Im running now" : "Im walking now";
-//   },
-//   sleep: function() {
-//     this.isSleeping = !this.isSleeping;
-//     return this.isSleeping ? "Im sleeping now" : "Im awake now"
-//   }
-// };
-// const secondCat = new Object(firstCat);
+const max_try = 5;
 
-function Cat(name, color, breed, age, isSleeping, isMale) {
-  this.name = name;
-  this.color = color;
-  this.breed = breed;
-  this.age = age;
-  this.isSleeping = isSleeping;
-  this.isMale = isMale;
-  this.run = function () {
-    this.isRunning = !this.isRunning;
-    return this.isRunning ? "Im running now" : "Im walking now";
-  };
-  this.sleep = function () {
-    this.isSleeping = !this.isSleeping;
-    return this.isSleeping ? "Im sleeping now" : "Im awake now";
-  };
+function firstTask() {
+  for (let i = 25; i > 0; i--) {
+    console.log(i);
+  }
 }
 
-const firstCat = new Cat("Vaska", "grey", "Persian", 3, true, true);
-
-const secondCat = new Cat("Mashka", "black", "Spinx", 2, true, true);
-
-function User(name, surname, age) {
-  this.name = name;
-  this.surname = surname;
-  this.fullName = name + " " + surname;
-  this.age = age;
-}
-
-const firstUser = new User("Ivan", "Ivanovich", "Ivan Ivanovich", 16);
-
-function Country(name, population, area) {
-  this.name = name;
-  this.population = population;
-  this.area = area;
-  this.update = function () {
-    this.density = this.population / this.area;
-  };
-  this.update();
-}
-
-const Ukraine = new Country("Ukraine", 25000, 50);
-
-function Car(name, maxSpeed) {
-  this.name = name;
-  this.maxSpeed = maxSpeed;
-  this.speed = 0;
-  this.accelerate = function (number) {
-    this.speed = this.speed + number;
-    if (this.speed > this.speed) {
-      this.speed = this.maxSpeed;
+function secondTask() {
+  for (let i = 10; i <= 50; i++) {
+    if (i % 5 === 0) {
+      console.log(i);
     }
-    return this.speed;
-  };
-  this.deaccelerate = function (number) {
-    this.speed = this.speed - number;
-    if (0 < this.speed) {
-      this.speed = 0;
-    }
-    return this.speed;
-  };
-  this.stop = function () {
-    return (this.speed = 0);
-  };
+  }
 }
 
-const car = new Car("Shevrole", 120);
+function ThirdTask() {
+  let num = 0;
+  for (let i = 1; i <= 100; i++) {
+    num = num + i;
+  }
+  return num;
+}
+
+function FourthTask() {
+  for (let i = 0; i < max_try; i++) {
+    const userInput = +prompt("Enter solution of (2+2*2)?");
+    if (userInput === 6) {
+      alert("Right, good job!");
+      break;
+    }
+  }
+}
+
+function firstTaskwhile() {
+  let i = 25;
+  while (i > 0) {
+    console.log(i);
+    i--;
+  }
+}
+
+function secondTaskWhile() {
+  const startCounetr = 10;
+  const endCounter = 50;
+  let i = startCounetr;
+  while (i <= endCounter) {
+    if (i % 5 === 0) {
+      console.log(i);
+    }
+    i++;
+  }
+}
+
+function ThirdTaskWhile() {
+  let counter = 0;
+  const goal = 100;
+  let result = 0;
+  while (counter <= goal) {
+    result += counter;
+    counter++;
+  }
+  return result;
+}
+
+function FourthTaskWhile() {
+  let i = 0;
+  while (i < max_try) {
+    const userInput = +prompt("Enter solution of (2+2*2)?");
+    if (userInput === 6) {
+      alert("Right, good job!");
+      break;
+    }
+  }
+}
