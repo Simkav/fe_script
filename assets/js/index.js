@@ -22,7 +22,7 @@ function secondTask() {
 
 //3)  Найти сумму чисел в пределах от 1 до 100.
 
-function ThirdTask() {
+function thirdTask() {
   let num = 0;
   for (let i = 1; i <= 100; i++) {
     num = num + i;
@@ -32,7 +32,7 @@ function ThirdTask() {
 
 //4) предлагать пользователю решить пример (2 + 2 * 2) до тех пор, пока он его не решит
 
-function FourthTask() {
+function fourthTask() {
   for (let i = 0; i < max_try; i++) {
     const userInput = +prompt("Enter solution of (2+2*2)?");
     if (userInput === 6) {
@@ -67,7 +67,7 @@ function secondTaskWhile() {
 
 //3)  Найти сумму чисел в пределах от 1 до 100.
 
-function ThirdTaskWhile() {
+function thirdTaskWhile() {
   let counter = 0;
   const goal = 100;
   let result = 0;
@@ -80,7 +80,7 @@ function ThirdTaskWhile() {
 
 //4) предлагать пользователю решить пример (2 + 2 * 2) до тех пор, пока он его не решит
 
-function FourthTaskWhile() {
+function fourthTaskWhile() {
   let i = 0;
   while (i < max_try) {
     const userInput = +prompt("Enter solution of (2+2*2)?");
