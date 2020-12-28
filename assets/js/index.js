@@ -2,11 +2,15 @@
 
 const max_try = 5;
 
+//1) Вывод чисел от 25 до 0 (порядок уменьшения)
+
 function firstTask() {
   for (let i = 25; i > 0; i--) {
     console.log(i);
   }
 }
+
+//2) Вывод чисел от 10 до 50, которые кратны 5
 
 function secondTask() {
   for (let i = 10; i <= 50; i++) {
@@ -16,6 +20,8 @@ function secondTask() {
   }
 }
 
+//3)  Найти сумму чисел в пределах от 1 до 100.
+
 function ThirdTask() {
   let num = 0;
   for (let i = 1; i <= 100; i++) {
@@ -23,6 +29,8 @@ function ThirdTask() {
   }
   return num;
 }
+
+//4) предлагать пользователю решить пример (2 + 2 * 2) до тех пор, пока он его не решит
 
 function FourthTask() {
   for (let i = 0; i < max_try; i++) {
@@ -34,6 +42,8 @@ function FourthTask() {
   }
 }
 
+//1) Вывод чисел от 25 до 0 (порядок уменьшения)
+
 function firstTaskwhile() {
   let i = 25;
   while (i > 0) {
@@ -41,6 +51,7 @@ function firstTaskwhile() {
     i--;
   }
 }
+//2) Вывод чисел от 10 до 50, которые кратны 5
 
 function secondTaskWhile() {
   const startCounetr = 10;
@@ -54,6 +65,8 @@ function secondTaskWhile() {
   }
 }
 
+//3)  Найти сумму чисел в пределах от 1 до 100.
+
 function ThirdTaskWhile() {
   let counter = 0;
   const goal = 100;
@@ -65,6 +78,8 @@ function ThirdTaskWhile() {
   return result;
 }
 
+//4) предлагать пользователю решить пример (2 + 2 * 2) до тех пор, пока он его не решит
+
 function FourthTaskWhile() {
   let i = 0;
   while (i < max_try) {
@@ -73,5 +88,6 @@ function FourthTaskWhile() {
       alert("Right, good job!");
       break;
     }
+    i++;
   }
 }
