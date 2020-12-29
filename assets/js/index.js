@@ -15,13 +15,11 @@ function MyArrayProto() {
     }
   };
   this.unshift = function unshift() {
-    for (let i = 0; i < arguments.length; i++) {
-      this.push(0);
-    }
-    for (let i = 0; i < arguments.length; i++) {
+    for (let i = this.length - 1; i >= 0; i--) {
       this[i + arguments.length] = this[i];
-      // console.log(this[i]);
+      this[i] = arguments[i];
     }
+    return (this.length += arguments.length);
   };
 }
 MyArray.prototype = new MyArrayProto();
