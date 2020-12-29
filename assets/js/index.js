@@ -1,5 +1,5 @@
 "use strict";
-
+//TODO ARRAY.SHIFT
 function MyArrayProto() {
   this.push = function push() {
     for (let i = 0; i < arguments.length; i++) {
@@ -22,7 +22,6 @@ function MyArrayProto() {
     return (this.length += arguments.length);
   };
 }
-MyArray.prototype = new MyArrayProto();
 function MyArray() {
   this.length = 0;
   if (arguments.length > 0) {
@@ -31,6 +30,7 @@ function MyArray() {
     }
   }
 }
+MyArray.prototype = new MyArrayProto();
 
 function Accumulator(startingValue) {
   if (this.checkNumber(startingValue)) {
