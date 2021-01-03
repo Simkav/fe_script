@@ -41,7 +41,16 @@ function MyArrayProto() {
     }
     return bufferArray;
   };
-}
+  this.reverse = function reverse() {
+    const arrLength = this.length;
+    const half = Math.floor(arrLength / 2);
+    for (let i = 0; i < half; i++) {
+      let buffer = this[i];
+      this[i] = this[arrLength - 1 - i];
+      this[arrLength - 1 - i] = buffer;
+    }
+    return this;
+  };
 function MyArray() {
   this.length = 0;
   if (arguments.length > 0) {
