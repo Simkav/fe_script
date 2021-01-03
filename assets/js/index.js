@@ -1,5 +1,4 @@
 "use strict";
-//TODO ARRAY.SHIFT
 function MyArrayProto() {
   this.push = function push() {
     for (let i = 0; i < arguments.length; i++) {
