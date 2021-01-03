@@ -28,6 +28,19 @@ function MyArrayProto() {
     --this.length;
     return returnValue;
   };
+  this.concat = function concat() {
+    let bufferArray = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      bufferArray[i] = this[i];
+    }
+    bufferArray.length = this.length;
+    for (let i = 0; i < arguments.length; i++) {
+      for (let j = 0; j < arguments[i].length; j++) {
+        bufferArray.push(arguments[i][j]);
+      }
+    }
+    return bufferArray;
+  };
 }
 function MyArray() {
   this.length = 0;
