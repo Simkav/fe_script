@@ -51,6 +51,19 @@ function MyArrayProto() {
     }
     return this;
   };
+  this.forEach = function forEach(f) {
+    for (let i = 0; i < this.length; i++) {
+      f(this[i]);
+    }
+  };
+  this.map = function map(f) {
+    let bufferArray = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      bufferArray.push(f(this[i]));
+    }
+    return bufferArray;
+  };
+}
 function MyArray() {
   this.length = 0;
   if (arguments.length > 0) {
