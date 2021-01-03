@@ -9,10 +9,9 @@ function MyArrayProto() {
     return this.length;
   };
   this.pop = function pop() {
-    if (this.length > 0) {
-      const lastItem = this[this.length - 1];
-      delete this[--this.length];
-    }
+    const lastItem = this[this.length - 1];
+    delete this[--this.length];
+    return lastItem;
   };
   this.unshift = function unshift() {
     for (let i = this.length - 1; i >= 0; i--) {
