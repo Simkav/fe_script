@@ -20,6 +20,14 @@ function MyArrayProto() {
     }
     return (this.length += arguments.length);
   };
+  this.shift = function shift() {
+    const returnValue = this[0];
+    for (let i = 1; i < this.length; i++) {
+      this[i - 1] = this[i];
+    }
+    --this.length;
+    return returnValue;
+  };
 }
 function MyArray() {
   this.length = 0;
