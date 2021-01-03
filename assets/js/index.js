@@ -77,25 +77,4 @@ function MyArray() {
 }
 MyArray.prototype = new MyArrayProto();
 
-function Accumulator(startingValue) {
-  if (this.checkNumber(startingValue)) {
-    this.value = startingValue;
-  } else {
-    throw Error("WRONG INPUT");
-  }
-}
-
-function AccumulatorProto() {
-  this.read = function read() {
-    const input = +prompt("Input number");
-    if (this.checkNumber(input)) {
-      return;
-    }
-    return (this.value += input);
-  };
-  this.checkNumber = function checkNumber(num) {
-    return !isNaN(num) && num > 0;
-  };
-}
-
-Accumulator.prototype = new AccumulatorProto();
+let arr = new MyArray(1, 2, 3, 4, 5, 6);
