@@ -65,6 +65,9 @@ function MyArrayProto() {
   };
 }
 function MyArray() {
+  this.isMyArray = function isMyArray(obj) {
+    return this instanceof obj;
+  };
   this.length = 0;
   if (arguments.length > 0) {
     for (let i = 0; i < arguments.length; i++) {
