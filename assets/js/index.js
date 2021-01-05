@@ -50,6 +50,31 @@ function MyArrayProto() {
     }
     return this;
   };
+  this.some = function some(func) {
+    for (let i = 0; i < this.length; i++) {
+      if (func(this[i])) {
+        return true;
+      }
+    }
+    return false;
+  };
+  this.every = function every(func) {
+    for (let i = 0; i < this.length; i++) {
+      if (!func(this[i])) {
+        return false;
+      }
+    }
+    return true;
+  };
+  this.filter = function filter(func) {
+    const bufferArray = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      if (func(this[i])) {
+        bufferArray.push(this[i]);
+      }
+    }
+    return bufferArray;
+  };
   this.forEach = function forEach(f) {
     for (let i = 0; i < this.length; i++) {
       f(this[i]);
@@ -77,3 +102,11 @@ function MyArray() {
 MyArray.prototype = new MyArrayProto();
 
 let arr = new MyArray(1, 2, 3, 4, 5, 6);
+
+function isEven(num) {
+  return num % 2 === 0;
+}
+
+function isOdd(num) {
+  return num % 2 !== 0;
+}
