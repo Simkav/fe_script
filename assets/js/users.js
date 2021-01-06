@@ -1,13 +1,21 @@
 "use strict";
 
-function getFullName() {
-  return `${this.firstName} ${this.lastName}`;
-}
-
 function getRandomNationalty() {
   return NATIONALITES[
     Math.round(Math.random() * (NATIONALITES.length - 1 - 0) + 0)
   ];
+}
+
+// function UserProto() {
+//   this.getFullName = function getFullName() {
+//     return `${this.firstName} ${this.lastName}`;
+//   };
+// }
+
+function UserProto() {
+  this.getFullName = function getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  };
 }
 
 function User(
@@ -26,8 +34,10 @@ function User(
   this.isMale = isMale;
   this.isSubscribed = isSubscribed;
   this.nationality = nationality;
-  this.getFullName = getFullName;
+  this.fullName = this.getFullName();
 }
+
+User.prototype = new UserProto();
 
 function createRandomUsers(amount = 1) {
   const db = [];
@@ -46,9 +56,9 @@ function createRandomUsers(amount = 1) {
   }
   return db;
 }
-const users = createRandomUsers(10);
 
-// console.table(users);
+
+const users = createRandomUsers(10);
 
 const fullNames = users.map(function (user) {
   return user.getFullName();
