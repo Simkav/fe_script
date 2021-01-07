@@ -87,10 +87,30 @@ function MyArrayProto() {
     }
     return bufferArray;
   };
+  this.spreadArray = function spreadArray(arr, goalarr, depth) {
+    arr.forEach((elem) => {
+      if (arr.isMyArray(elem)) {
+        depth > 1
+          ? this.spreadArray(elem, goalarr, depth - 1)
+          : goalarr.push(elem);
+      } else {
+        goalarr.push(elem);
+      }
+    });
+  };
+  this.customFlat = function customFlat(arr, depth = 1) {
+    const result = new MyArray();
+    arr.forEach((elem) => {
+      arr.isMyArray(elem)
+        ? this.spreadArray(elem, result, depth)
+        : result.push(elem);
+    });
+    return result;
+  };
 }
 
 function MyArray() {
-  this.isMyArray = function (obj) {
+  this.isMyArray = function isMyArray(obj) {
     return obj instanceof MyArray;
   };
   this.length = 0;
@@ -112,22 +132,3 @@ let arr = new MyArray(1, 2, 3, 4, 5, 6);
 // function isOdd(num) {
 //   return num % 2 !== 0;
 // }
-
-//UNDER TODO
-function spreadArray(arr, goalarr, depth) {
-  arr.forEach((elem) => {
-    if (Array.isArray(elem)) {
-      depth > 1 ? spreadArray(elem, goalarr, depth - 1) : goalarr.push(elem);
-    } else {
-      goalarr.push(elem);
-    }
-  });
-}
-
-function customFlat(arr, depth = 1) {
-  const result = [];
-  arr.forEach((elem) => {
-    Array.isArray(elem) ? spreadArray(elem, result, depth) : result.push(elem);
-  });
-  return result;
-}
