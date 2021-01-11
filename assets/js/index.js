@@ -87,6 +87,8 @@ function MyArrayProto() {
     }
     return bufferArray;
   };
+  //TODO Refactor
+  //Move spredArray logic in flat
   this.spreadArray = function spreadArray(arr, goalarr, depth) {
     arr.forEach((elem) => {
       if (MyArray.isMyArray(elem)) {
