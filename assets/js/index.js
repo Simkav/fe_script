@@ -89,7 +89,7 @@ function MyArrayProto() {
   };
   this.spreadArray = function spreadArray(arr, goalarr, depth) {
     arr.forEach((elem) => {
-      if (arr.isMyArray(elem)) {
+      if (MyArray.isMyArray(elem)) {
         depth > 1
           ? this.spreadArray(elem, goalarr, depth - 1)
           : goalarr.push(elem);
@@ -98,10 +98,10 @@ function MyArrayProto() {
       }
     });
   };
-  this.customFlat = function customFlat(arr, depth = 1) {
+  this.flat = function flat(depth = 1) {
     const result = new MyArray();
-    arr.forEach((elem) => {
-      arr.isMyArray(elem)
+    this.forEach((elem) => {
+      MyArray.isMyArray(elem)
         ? this.spreadArray(elem, result, depth)
         : result.push(elem);
     });
