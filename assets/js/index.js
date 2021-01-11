@@ -110,9 +110,6 @@ function MyArrayProto() {
 }
 
 function MyArray() {
-  this.isMyArray = function isMyArray(obj) {
-    return obj instanceof MyArray;
-  };
   this.length = 0;
   if (arguments.length > 0) {
     for (let i = 0; i < arguments.length; i++) {
@@ -120,6 +117,10 @@ function MyArray() {
     }
   }
 }
+
+MyArray.isMyArray = function isMyArray(obj) {
+  return obj instanceof MyArray;
+};
 
 MyArray.prototype = new MyArrayProto();
 
