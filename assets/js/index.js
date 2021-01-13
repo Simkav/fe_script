@@ -9,9 +9,6 @@ class User {
   getFullName() {
     return `${this.name} ${this.surname}`;
   }
-  static isUser(obj) {
-    return obj instanceof User;
-  }
 }
 
 class Admin extends User {
@@ -19,25 +16,14 @@ class Admin extends User {
     super(name, surname, age);
     this.permission = permission;
   }
-  ban(user) {
-    if (User.isUser(user)) {
-      if (user.isBanned === true) {
-        throw new Error(`${user.getFullName()} is already banned`);
-      }
-      user.isBanned = true;
-      return `${user.getFullName()} sucsesfull banned`;
+  toggleBan(user) {
+    if (user instanceof User) {
+      user.isBanned = !user.isBanned;
+      return user.isBanned
+        ? `${user.getFullName()} banned`
+        : `${user.getFullName()} unbanned`;
     }
-    throw new Error(`${user} is not a user`);
-  }
-  unban(user) {
-    if (User.isUser(user)) {
-      if (user.isBanned === false) {
-        throw new Error(`${user.getFullName()} is not banned`);
-      }
-      user.isBanned = false;
-      return `${user.getFullName()} sucsesfull unbanned`;
-    }
-    throw new Error(`${user} is not a user`);
+    throw new TypeError('Not a user');
   }
 }
 const u = new User('test', 'testov', 15);
