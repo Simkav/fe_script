@@ -1,65 +1,44 @@
-'use strict';
-
-const MIN_ZP = 6000 / 21;
-
-class Worker {
-  constructor(name, surName, salaryRate = 600, dayOnWork = 0) {
+class User {
+  constructor(name, surname, age, isBanned = false) {
     this.name = name;
-    this.surName = surName;
-    this.salaryRate = salaryRate;
-    this.dayOnWork = dayOnWork;
-  }
-
-  set salaryRate(newRate) {
-    if (typeof newRate !== 'number') {
-      throw new TypeError('Not a number');
-    }
-    if (newRate < 0) {
-      throw new RangeError();
-    }
-    this._salaryRate = newRate;
-  }
-
-  getSalary() {
-    return this.salaryRate * this.dayOnWork;
+    this.surname = surname;
+    this.age = age;
+    this.isBanned = isBanned;
   }
 
   getFullName() {
-    return `${this.name} ${this.surName}`;
+    return `${this.name} ${this.surname}`;
   }
-
-  changeSalaryRate(rate) {
-    return (this.salaryRate = rate);
-  }
-
-  workedDay() {
-    return ++this.dayOnWork;
-  }
-
-  issueSalary() {
-    console.log(`Payed ${this.getSalary()} to ${this.getFullName()}`);
-    this.workedDay = 0;
-  }
-}
-const w1 = new Worker('John', 'Doe', 500, 5);
-
-class Friend {
-  constructor(name, appleAmount, friends) {
-    this.name = name;
-    this.appleAmount = appleAmount;
-    this.friends = friends;
-  }
-
-  getAllApple() {
-    let myApples = this.appleAmount;
-    this.friends.forEach((friend) => {
-      myApples += friend.appleAmount;
-    });
-    return myApples;
+  static isUser(obj) {
+    return obj instanceof User;
   }
 }
 
-const me = new Friend('Ivan', 5, [
-  new Friend('John', 10),
-  new Friend('Keks', 20),
-]);
+class Admin extends User {
+  constructor(name, surname, age, isBanned, permission = '*') {
+    super(name, surname, age);
+    this.permission = permission;
+  }
+  ban(user) {
+    if (User.isUser(user)) {
+      if (user.isBanned === true) {
+        throw new Error(`${user.getFullName()} is already banned`);
+      }
+      user.isBanned = true;
+      return `${user.getFullName()} sucsesfull banned`;
+    }
+    throw new Error(`${user} is not a user`);
+  }
+  unban(user) {
+    if (User.isUser(user)) {
+      if (user.isBanned === false) {
+        throw new Error(`${user.getFullName()} is not banned`);
+      }
+      user.isBanned = false;
+      return `${user.getFullName()} sucsesfull unbanned`;
+    }
+    throw new Error(`${user} is not a user`);
+  }
+}
+const u = new User('test', 'testov', 15);
+const adm = new Admin('admin', 'admin');
