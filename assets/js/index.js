@@ -1,30 +1,30 @@
-class User {
-  constructor(name, surname, age, isBanned = false) {
-    this.name = name;
-    this.surname = surname;
-    this.age = age;
-    this.isBanned = isBanned;
+class RangeValidator {
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
   }
-
-  getFullName() {
-    return `${this.name} ${this.surname}`;
-  }
-}
-
-class Admin extends User {
-  constructor(name, surname, age, isBanned, permission = '*') {
-    super(name, surname, age);
-    this.permission = permission;
-  }
-  toggleBan(user) {
-    if (user instanceof User) {
-      user.isBanned = !user.isBanned;
-      return user.isBanned
-        ? `${user.getFullName()} banned`
-        : `${user.getFullName()} unbanned`;
+  set from(v) {
+    if (typeof v !== "number") {
+      throw new TypeError(`${v} not a number`);
     }
-    throw new TypeError('Not a user');
+    this._from = v;
+  }
+  set to(v) {
+    if (typeof v !== "number") {
+      throw new TypeError(`${v} not a number`);
+    }
+    this._to = v;
+  }
+  get from() {
+    return this._from;
+  }
+  get to() {
+    return this._to;
+  }
+  get range() {
+    return [this._from, this._to];
+  }
+  validate(num) {
+    return num >= this._from && num <= this._to;
   }
 }
-const u = new User('test', 'testov', 15);
-const adm = new Admin('admin', 'admin');
