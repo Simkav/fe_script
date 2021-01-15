@@ -114,6 +114,8 @@ class RangeValidator {
   set from(v) {
     if (typeof v !== "number") {
       throw new TypeError(`${v} not a number`);
+    } else if (this.to < v) {
+      throw new RangeError("Second argument must be bigger then first");
     }
     this._from = v;
   }
