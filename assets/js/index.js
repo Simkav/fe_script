@@ -35,7 +35,17 @@ class Student extends User {
   }
 }
 
+const student = new Student("Test", "Testovich", 2017);
+//Test
+/*
+console.log(student.getCourse()) | 5;
+student.year = 2020;
+console.log(student.getCourse()) | 2;
+student.year = 2021;
+console.log(student.getCourse()) | 1;
+*/
 {
+  //remove when use
   class MyArray {
     constructor() {
       this.length = 0;
@@ -141,41 +151,42 @@ class Student extends User {
       return bufferArray;
     }
   }
-}
-class RangeValidator {
-  constructor(from, to) {
-    this.from = from;
-    this.to = to;
-  }
-  set from(v) {
-    if (typeof v !== "number") {
-      throw new TypeError(`${v} not a number`);
-    } else if (this.to < v) {
-      throw new RangeError("Second argument must be bigger then first");
+
+  class RangeValidator {
+    constructor(from, to) {
+      this.from = from;
+      this.to = to;
     }
-    this._from = v;
-  }
-  set to(v) {
-    if (typeof v !== "number") {
-      throw new TypeError(`${v} not a number`);
-    } else if (this.from > v) {
-      throw new RangeError("Second argument must be bigger then first");
+    set from(v) {
+      if (typeof v !== "number") {
+        throw new TypeError(`${v} not a number`);
+      } else if (this.to < v) {
+        throw new RangeError("Second argument must be bigger then first");
+      }
+      this._from = v;
     }
-    this._to = v;
-  }
-  get from() {
-    return this._from;
-  }
-  get to() {
-    return this._to;
-  }
-  get range() {
-    return [this._from, this._to];
-  }
-  validate(num) {
-    if (num >= this._from && num <= this._to) {
-      return num;
+    set to(v) {
+      if (typeof v !== "number") {
+        throw new TypeError(`${v} not a number`);
+      } else if (this.from > v) {
+        throw new RangeError("Second argument must be bigger then first");
+      }
+      this._to = v;
     }
-    throw new RangeError(`${num} is not in the array`);
+    get from() {
+      return this._from;
+    }
+    get to() {
+      return this._to;
+    }
+    get range() {
+      return [this._from, this._to];
+    }
+    validate(num) {
+      if (num >= this._from && num <= this._to) {
+        return num;
+      }
+      throw new RangeError(`${num} is not in the array`);
+    }
   }
-}
+} //remove when use
