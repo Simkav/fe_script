@@ -9,6 +9,32 @@ class User {
     return `${this.name} ${this.surname}`;
   }
 }
+
+class Student extends User {
+  constructor(name, surname, year) {
+    super(name, surname);
+    this.year = year;
+  }
+  set year(v) {
+    if (typeof v !== "number") {
+      throw new TypeError("Year must be number");
+    }
+    this._year = v;
+  }
+  get year() {
+    return this._year;
+  }
+  getCourse() {
+    const result = new Date().getFullYear() - this.year + 1;
+    if (result > 5) {
+      throw new RangeError("Student finish education");
+    } else if (result < 0) {
+      throw new RangeError("Student haven't started education yet");
+    }
+    return result;
+  }
+}
+
 {
   class MyArray {
     constructor() {
