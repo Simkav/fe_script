@@ -106,3 +106,38 @@
     }
   }
 }
+class RangeValidator {
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+  }
+  set from(v) {
+    if (typeof v !== "number") {
+      throw new TypeError(`${v} not a number`);
+    }
+    this._from = v;
+  }
+  set to(v) {
+    if (typeof v !== "number") {
+      throw new TypeError(`${v} not a number`);
+    } else if (this.from > v) {
+      throw new RangeError("Second argument must be bigger then first");
+    }
+    this._to = v;
+  }
+  get from() {
+    return this._from;
+  }
+  get to() {
+    return this._to;
+  }
+  get range() {
+    return [this._from, this._to];
+  }
+  validate(num) {
+    if (num >= this._from && num <= this._to) {
+      return num;
+    }
+    throw new RangeError(`${num} is not in the array`);
+  }
+}
