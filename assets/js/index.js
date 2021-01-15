@@ -9,15 +9,20 @@ class User {
     return `${this.name} ${this.surname}`;
   }
 }
-
 class Student extends User {
+  /**
+   *
+   * @param {String} name
+   * @param {String} surname
+   * @param {Date} year
+   */
   constructor(name, surname, year) {
     super(name, surname);
     this.year = year;
   }
   set year(v) {
-    if (typeof v !== "number") {
-      throw new TypeError("Year must be number");
+    if (!(v instanceof Date)) {
+      throw new TypeError("Year must be a Date");
     }
     this._year = v;
   }
@@ -25,7 +30,7 @@ class Student extends User {
     return this._year;
   }
   getCourse() {
-    const result = new Date().getFullYear() - this.year + 1;
+    const result = new Date().getFullYear() - this.year.getFullYear() + 1;
     if (result > 5) {
       throw new RangeError("Student finish education");
     } else if (result < 0) {
@@ -35,7 +40,7 @@ class Student extends User {
   }
 }
 
-const student = new Student("Test", "Testovich", 2017);
+const student = new Student("Test", "Testovich", new Date());
 //Test
 /*
 console.log(student.getCourse()) | 5;
