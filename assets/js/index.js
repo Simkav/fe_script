@@ -33,7 +33,7 @@ class Student extends User {
     const result = new Date().getFullYear() - this.year.getFullYear() + 1;
     if (result > 5) {
       throw new RangeError("Student finish education");
-    } else if (result < 0) {
+    } else if (result < 1) {
       throw new RangeError("Student haven't started education yet");
     }
     return result;
