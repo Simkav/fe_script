@@ -14,23 +14,23 @@ class Student extends User {
    *
    * @param {String} name
    * @param {String} surname
-   * @param {Date} year
+   * @param {Date} date
    */
-  constructor(name, surname, year) {
+  constructor(name, surname, date) {
     super(name, surname);
-    this.year = year;
+    this.date = date;
   }
-  set year(v) {
+  set date(v) {
     if (!(v instanceof Date)) {
       throw new TypeError("Year must be a Date");
     }
-    this._year = v;
+    this._date = v;
   }
-  get year() {
-    return this._year;
+  get date() {
+    return this._date;
   }
   getCourse() {
-    const result = new Date().getFullYear() - this.year.getFullYear() + 1;
+    const result = new Date().getFullYear() - this.date.getFullYear() + 1;
     if (result > 5) {
       throw new RangeError("Student finish education");
     } else if (result < 1) {
@@ -44,9 +44,9 @@ const student = new Student("Test", "Testovich", new Date());
 //Test
 /*
 console.log(student.getCourse()) | 5;
-student.year = 2020;
+student.date = 2020;
 console.log(student.getCourse()) | 2;
-student.year = 2021;
+student.date = 2021;
 console.log(student.getCourse()) | 1;
 */
 {
