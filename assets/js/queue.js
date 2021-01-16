@@ -1,9 +1,12 @@
 'use strict';
 class Queue {
-  constructor() {
+  constructor(...args) {
     this.size = 0;
     this.tail = 0;
     this.head = 0;
+    args.forEach((value) => {
+      this.enqueue(value);
+    });
   }
   enqueue(value) {
     this[this.tail] = value;
