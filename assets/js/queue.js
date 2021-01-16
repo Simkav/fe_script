@@ -15,13 +15,10 @@ class Queue {
   }
   dequeue() {
     if (this.size === 0) {
-      this.tail = 0;
-      this.head = 0;
       return undefined;
     }
     const returnValue = this[this.head];
-    delete this[this.head];
-    ++this.head;
+    delete this[this.head++];
     --this.size;
     return returnValue;
   }
