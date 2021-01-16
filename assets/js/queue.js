@@ -1,47 +1,32 @@
-"use strict";
+'use strict';
 class Queue {
   constructor() {
     this.size = 0;
-    this.firstIndex = 0;
+    this.tail = 0;
+    this.head = 0;
   }
   enqueue(value) {
-    this[this.size] = value;
-    return this.size++;
+    this[this.tail] = value;
+    ++this.tail;
+    return ++this.size;
   }
-  test() {
-    if (this.size === 0) {
-      return undefined;
-    }
-    const returnValue = this[this.firstIndex];
-    delete this[this.firstIndex];
-    // this.firstIndex = this.firstIndex + 1;
-    --this.size;
-    return returnValue;
-  }
-
   dequeue() {
     if (this.size === 0) {
+      this.tail = 0;
+      this.head = 0;
       return undefined;
     }
-    const returnValue = this[0];
-    for (let i = 0; i < this.size - 1; i++) {
-      this[i] = this[i + 1];
-    }
-    delete this[this.size - 1];
+    const returnValue = this[this.head];
+    delete this[this.head];
+    ++this.head;
     --this.size;
     return returnValue;
   }
   front() {
-    return this[this.firstIndex];
+    return this[0];
   }
   get isEmpty() {
     return !(this._size === 0);
-  }
-  set firstIndex(v) {
-    this._firstIndex = v;
-  }
-  get firstIndex() {
-    return this._firstIndex;
   }
   set size(v) {
     this._size = v;
@@ -49,8 +34,20 @@ class Queue {
   get size() {
     return this._size;
   }
+  set tail(v) {
+    this._tail = v;
+  }
+  get tail() {
+    return this._tail;
+  }
+  set head(v) {
+    this._head = v;
+  }
+  get head() {
+    return this._head;
+  }
   [Symbol.iterator]() {
-    return new QueueIterator();
+    return new QueueIterator(this);
   }
 }
 class QueueIterator {}
