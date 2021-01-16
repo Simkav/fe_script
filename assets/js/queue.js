@@ -26,7 +26,7 @@ class Queue {
     return this[this.head];
   }
   get isEmpty() {
-    return !(this._size === 0);
+    return this._size === 0;
   }
   set size(v) {
     this._size = v;
