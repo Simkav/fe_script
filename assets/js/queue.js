@@ -50,5 +50,17 @@ class Queue {
     return new QueueIterator(this);
   }
 }
-class QueueIterator {}
+class QueueIterator {
+  constructor(queue) {
+    this.queue = queue;
+    this.nextElem = this.queue.head;
+  }
+  next() {
+    return {
+      value: queue[this.nextElem++],
+      done: this.nextElem > queue.tail,
+    };
+  }
+}
+
 const queue = new Queue();
