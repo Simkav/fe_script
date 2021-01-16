@@ -62,5 +62,9 @@ class QueueIterator {
     };
   }
 }
-
-const queue = new Queue();
+//TEST
+const queue = new Queue(1, 2, 3, 4, 5);
+console.log(queue);
+for (const v of queue) {
+  console.log(v);
+}

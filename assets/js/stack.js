@@ -46,3 +46,9 @@ class StackIterator {
     };
   }
 }
+//TEST
+const stack = new Stack(1, 2, 3, 4, 5);
+console.log(stack);
+for (const v of stack) {
+  console.log(v);
+}
