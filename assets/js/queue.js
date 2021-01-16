@@ -23,7 +23,7 @@ class Queue {
     return returnValue;
   }
   front() {
-    return this[0];
+    return this[this.head];
   }
   get isEmpty() {
     return !(this._size === 0);
