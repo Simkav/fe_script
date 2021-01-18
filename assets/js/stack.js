@@ -46,24 +46,37 @@ class StackIterator {
     };
   }
 }
-//TEST
-const checkSequence = (str) => {
+/**
+ *
+ * @param {String} sequence
+ * @param {String} rules - String like "()[]<>{}"
+ */
+const checkSequence = (sequence, rules = '()[]<>{}') => {
+  if (rules.length % 2 !== 0) {
+    throw new Error('Wrong rules');
+  }
+  if (sequence.length % 2 !== 0) {
+    throw new Error('Wrong sequence');
+  }
   const stack = new Stack();
-  for (const symbol of str) {
-    if (symbol === '(') {
-      stack.push(symbol);
-    } else if (symbol === ')' && stack.peek() === '(') {
-      stack.pop();
-    } else if (symbol === '[') {
-      stack.push(symbol);
-    } else if (symbol === ']' && stack.peek() === '[') {
-      stack.pop();
-    } else {
-      throw new Error('error');
+  for (let i = 0; i < sequence.length; i++) {
+    const char = sequence[i];
+    {
+      if (rules.includes(char)) {
+        if (rules.indexOf(char) % 2 === 0) {
+          stack.push(char);
+        } else {
+          if (stack.peek() === rules[rules.indexOf(char) - 1]) {
+            stack.pop();
+          }
+        }
+      } else {
+        throw new Error('rules dosnt include ' + char);
+      }
     }
   }
   if (!stack.isEmpty) {
-    throw new Error('error');
+    throw new Error('Wrong sequence');
   }
   return true;
 };
