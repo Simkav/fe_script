@@ -47,8 +47,23 @@ class StackIterator {
   }
 }
 //TEST
-const stack = new Stack(1, 2, 3, 4, 5);
-console.log(stack);
-for (const v of stack) {
-  console.log(v);
-}
+const checkSequence = (str) => {
+  const stack = new Stack();
+  for (const symbol of str) {
+    if (symbol === '(') {
+      stack.push(symbol);
+    } else if (symbol === ')' && stack.peek() === '(') {
+      stack.pop();
+    } else if (symbol === '[') {
+      stack.push(symbol);
+    } else if (symbol === ']' && stack.peek() === '[') {
+      stack.pop();
+    } else {
+      throw new Error('error');
+    }
+  }
+  if (!stack.isEmpty) {
+    throw new Error('error');
+  }
+  return true;
+};
