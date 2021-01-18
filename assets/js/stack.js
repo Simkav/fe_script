@@ -80,3 +80,7 @@ const checkSequence = (sequence, rules = '()[]<>{}') => {
   }
   return true;
 };
+//Test
+console.log(checkSequence('[[]]()([{}])'));
+console.log(checkSequence('121212121212345566', '123456'));
+console.log(checkSequence('(12{})', '(){}12'));
