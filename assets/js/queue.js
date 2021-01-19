@@ -1,38 +1,47 @@
 'use strict';
 class Queue {
   constructor(...args) {
-    this.size = 0;
-    this.tail = 0;
-    this.head = 0;
+    this._tail = 0;
+    this._head = 0;
     args.forEach((value) => {
       this.enqueue(value);
     });
   }
+  static mergeQueues(q1, q2) {
+    const buffer = new Queue();
+    while (!q1.isEmpty && !q2.isEmpty) {
+      buffer.enqueue(q1.dequeue());
+      buffer.enqueue(q2.dequeue());
+    }
+    while (!q1.isEmpty) {
+      buffer.enqueue(q1.dequeue());
+    }
+    while (!q2.isEmpty) {
+      buffer.enqueue(q2.dequeue());
+    }
+    return buffer;
+  }
+  get size() {
+    return this._tail - this._head;
+  }
   enqueue(value) {
-    this[this.tail] = value;
-    ++this.tail;
-    return ++this.size;
+    this[this._tail] = value;
+    this._tail++;
+    return this.size;
   }
   dequeue() {
     if (this.size === 0) {
       return undefined;
     }
-    const returnValue = this[this.head];
-    delete this[this.head++];
-    --this.size;
+    const returnValue = this[this._head];
+    delete this[this._head++];
     return returnValue;
   }
   front() {
-    return this[this.head];
+    return this[this._head];
   }
   get isEmpty() {
-    return this._size === 0;
-  }
-  set size(v) {
-    this._size = v;
-  }
-  get size() {
-    return this._size;
+    return this.size === 0;
   }
   set tail(v) {
     this._tail = v;
@@ -63,8 +72,5 @@ class QueueIterator {
   }
 }
 //TEST
-const queue = new Queue(1, 2, 3, 4, 5);
-console.log(queue);
-for (const v of queue) {
-  console.log(v);
-}
+const queue = new Queue(1, 3, 5, 7, 9);
+const testquee = new Queue(2, 4);
