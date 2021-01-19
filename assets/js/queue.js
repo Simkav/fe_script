@@ -9,15 +9,13 @@ class Queue {
   }
   static mergeQueues(q1, q2) {
     const buffer = new Queue();
-    while (!q1.isEmpty && !q2.isEmpty) {
-      buffer.enqueue(q1.dequeue());
-      buffer.enqueue(q2.dequeue());
-    }
-    while (!q1.isEmpty) {
-      buffer.enqueue(q1.dequeue());
-    }
-    while (!q2.isEmpty) {
-      buffer.enqueue(q2.dequeue());
+    while (!q1.isEmpty || !q2.isEmpty) {
+      if (q1.size) {
+        buffer.enqueue(q1.dequeue());
+      }
+      if (q2.size) {
+        buffer.enqueue(q2.dequeue());
+      }
     }
     return buffer;
   }
