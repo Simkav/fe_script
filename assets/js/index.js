@@ -1,197 +1,24 @@
-"use strict";
-
-class User {
-  constructor(name, surname) {
-    this.name = name;
-    this.surname = surname;
+'use strict';
+const compare = (firstString, secondString) => {
+  if (firstString.length !== secondString.length) {
+    throw new Error('Impossible');
   }
-  getFullName() {
-    return `${this.name} ${this.surname}`;
+  const firstMap = new Map();
+  const secondMap = new Map();
+  for (const char of firstString) {
+    firstMap.has(char)
+      ? firstMap.set(char, firstMap.get(char) + 1)
+      : firstMap.set(char, 1);
   }
-}
-class Student extends User {
-  /**
-   *
-   * @param {String} name
-   * @param {String} surname
-   * @param {Date} date
-   */
-  constructor(name, surname, date) {
-    super(name, surname);
-    this.date = date;
+  for (const char of secondString) {
+    secondMap.has(char)
+      ? secondMap.set(char, secondMap.get(char) + 1)
+      : secondMap.set(char, 1);
   }
-  set date(v) {
-    if (!(v instanceof Date)) {
-      throw new TypeError("Year must be a Date");
-    }
-    this._date = v;
-  }
-  get date() {
-    return this._date;
-  }
-  getCourse() {
-    const result = new Date().getFullYear() - this.date.getFullYear() + 1;
-    if (result > 5) {
-      throw new RangeError("Student finish education");
-    } else if (result < 1) {
-      throw new RangeError("Student haven't started education yet");
-    }
-    return result;
-  }
-}
-
-const student = new Student("Test", "Testovich", new Date());
-//Test
-/*
-console.log(student.getCourse()) | 5;
-student.date = 2020;
-console.log(student.getCourse()) | 2;
-student.date = 2021;
-console.log(student.getCourse()) | 1;
-*/
-{
-  //remove when use
-  class MyArray {
-    constructor() {
-      this.length = 0;
-      for (let i = 0; i < arguments.length; i++) {
-        this.push(arguments[i]);
-      }
-    }
-    flat(depth = 1) {
-      let result = new MyArray();
-      this.forEach((item) => {
-        if (MyArray.isMyArray(item) && depth) {
-          result = result.concat(item.flat(depth - 1));
-        } else if (item !== undefined) {
-          result.push(item);
-        }
-      });
-    }
-    push() {
-      for (let i = 0; i < arguments.length; i++) {
-        this[this.length] = arguments[i];
-      }
-      this.length += arguments.length;
-      return this.length;
-    }
-    pop() {
-      const lastItem = this[this.length - 1];
-      delete this[--this.length];
-      return lastItem;
-    }
-    unshift() {
-      for (let i = this.length - 1; i >= 0; i--) {
-        this[i + arguments.length] = this[i];
-        this[i] = arguments[i];
-      }
-      return (this.length += arguments.length);
-    }
-    shift() {
-      const returnValue = this[0];
-      for (let i = 1; i < this.length; i++) {
-        this[i - 1] = this[i];
-      }
-      --this.length;
-      return returnValue;
-    }
-    concat() {
-      let bufferArray = new MyArray();
-      for (let i = 0; i < this.length; i++) {
-        bufferArray[i] = this[i];
-      }
-      bufferArray.length = this.length;
-      for (let i = 0; i < arguments.length; i++) {
-        for (let j = 0; j < arguments[i].length; j++) {
-          bufferArray.push(arguments[i][j]);
-        }
-      }
-      return bufferArray;
-    }
-    reverse() {
-      const arrLength = this.length;
-      const half = Math.floor(arrLength / 2);
-      for (let i = 0; i < half; i++) {
-        let buffer = this[i];
-        this[i] = this[arrLength - 1 - i];
-        this[arrLength - 1 - i] = buffer;
-      }
-      return this;
-    }
-    some(func) {
-      for (let i = 0; i < this.length; i++) {
-        if (func(this[i])) {
-          return true;
-        }
-      }
-      return false;
-    }
-    every(func) {
-      for (let i = 0; i < this.length; i++) {
-        if (!func(this[i])) {
-          return false;
-        }
-      }
-      return true;
-    }
-    filter(func) {
-      const bufferArray = new MyArray();
-      for (let i = 0; i < this.length; i++) {
-        if (func(this[i])) {
-          bufferArray.push(this[i]);
-        }
-      }
-      return bufferArray;
-    }
-    forEach(f) {
-      for (let i = 0; i < this.length; i++) {
-        f(this[i]);
-      }
-    }
-    map(f) {
-      let bufferArray = new MyArray();
-      for (let i = 0; i < this.length; i++) {
-        bufferArray.push(f(this[i]));
-      }
-      return bufferArray;
+  for (const key of firstMap.keys()) {
+    if (firstMap.get(key) !== secondMap.get(key)) {
+      throw new Error('Impossible');
     }
   }
-
-  class RangeValidator {
-    constructor(from, to) {
-      this.from = from;
-      this.to = to;
-    }
-    set from(v) {
-      if (typeof v !== "number") {
-        throw new TypeError(`${v} not a number`);
-      } else if (this.to < v) {
-        throw new RangeError("Second argument must be bigger then first");
-      }
-      this._from = v;
-    }
-    set to(v) {
-      if (typeof v !== "number") {
-        throw new TypeError(`${v} not a number`);
-      } else if (this.from > v) {
-        throw new RangeError("Second argument must be bigger then first");
-      }
-      this._to = v;
-    }
-    get from() {
-      return this._from;
-    }
-    get to() {
-      return this._to;
-    }
-    get range() {
-      return [this._from, this._to];
-    }
-    validate(num) {
-      if (num >= this._from && num <= this._to) {
-        return num;
-      }
-      throw new RangeError(`${num} is not in the array`);
-    }
-  }
-} //remove when use
+  return true;
+};
